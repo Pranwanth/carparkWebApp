@@ -1,0 +1,61 @@
+h1 {
+  background-color: rgb(123, 173, 171);
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 90px;
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+body {
+  background-color: burlywood;
+}
+input[type="text"] {
+  width: 700px;
+  text-align: center;
+}
+#location-input {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  margin-top: 150px;
+  height: 20px;
+}
+.search_field {
+  text-align: center;
+}
+form {
+  display: inline-block;
+}
+button {
+  background-color: blue;
+  margin: auto;
+  height: 30px;
+  color: white;
+  display: inline-block;
+}
+h2 {
+  padding-top: 150px;
+  padding-left: 350px;
+  font-size: 30px;
+}
+.mission p {
+  padding-left: 350px;
+}
+button:hover {
+  background-color: #e63946;
+  color: #f1faee;
+}
+
+button:active {
+  background-color: chartreuse;
+  color: black;
+}
+#signInButton {
+  margin-top: 20px;
+  float: right;
+}
+#signUpButton {
+  margin-top: 20px;
+  float: right;
+}

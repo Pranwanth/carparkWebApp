@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enter Postal Code</title>
+    <link rel="stylesheet" href="project.css" />
+    <button id="signInButton" onclick="location.href = 'userLogin.html'">
+      Sign In
+    </button>
+    <button id="signUpButton" onclick="location.href = 'createAcc.html'">
+      Sign Up
+    </button>
+  </head>
+
+  <body>
+    <h1>CARPARK CHECKER</h1>
+    <div class="search_field">
+      <form>
+        <p>
+          <label for="username"></label>
+          <input
+            id="location-input"
+            type="text"
+            placeholder="Enter postal code:"
+            name="postal code"
+            minlength="6"
+            maxlength="6"
+            pattern="(?=(?:[0-8]){1})(?=(?:[1-9]){1})(?=(?:\D*\d){4}).*"
+            title="Invalid Postal Code"
+            required
+          />
+        </p>
+      </form>
+    </div>
+    <div class="search_field">
+      <button onclick="getcarparkinfo()">Search</button>
+    </div>
+    <section class="mission">
+      <h2>Our Mission</h2>
+      <p>
+        The project's aims to ensure drivers can openly compare carpark rates
+        and check for lot availability, to save
+      </p>
+      <p>their time as well as money.</p>
+    </section>
+    <script src="api.js"></script>
+  </body>
+</html>
