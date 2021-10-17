@@ -20,7 +20,7 @@ async function geocode() {
 
 async function convert2XY() {
     //wait for geocode to get coordinates
-    let coordinates = await geocode();//in json format
+    let coordinates = await geocode();//in json format testgit
     var lat = coordinates.results[0].geometry.location.lat;
     var lng = coordinates.results[0].geometry.location.lng;
    
