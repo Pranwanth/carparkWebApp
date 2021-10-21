@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Enter Postal Code</title>
     <link rel="stylesheet" href="project.css" />
-    <button id="signInButton" onclick="location.href = 'userLogin.html'">
-      Sign In
-    </button>
-    <button id="signUpButton" onclick="location.href = 'createAcc.html'">
-      Sign Up
-    </button>
+
+    <div class="dropdown">
+      <button onclick="dropdownfunc()" class="dropbtn">Menu </button>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="index.html">Home</a>
+        <a href="userLogin.html">Login</a>
+        <a href="createAcc.html">Sign Up</a>
+      </div>
+    </div>
+
+
   </head>
 
   <body>
     <h1>CARPARK CHECKER</h1>
+
+
     <div class="search_field">
       <form>
         <p>
