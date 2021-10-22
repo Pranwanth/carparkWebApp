@@ -11,7 +11,7 @@ async function geocode() {
         console.log(res);
         //return coordinates in json format
         return await res.json();
-        
+
     } catch (error) {
         console.log(error);
     }
@@ -23,7 +23,7 @@ async function convert2XY() {
     let coordinates = await geocode();//in json format testgit
     var lat = coordinates.results[0].geometry.location.lat;
     var lng = coordinates.results[0].geometry.location.lng;
-   
+
     coord = {
         latitude: lat,
         longitude: lng,
@@ -31,7 +31,7 @@ async function convert2XY() {
       text = JSON.stringify(coord);
       localStorage.setItem("search coordinates",text);
 
-  
+
 
     //call api to convert geocoordinates to XYformat
     let url="https://developers.onemap.sg/commonapi/convert/4326to3414?latitude=" +lat +"&longitude=" +lng;
@@ -40,11 +40,11 @@ async function convert2XY() {
         console.log("test");
         //return coordinates in json format
         return await res.json();
-        
+
     } catch (error) {
         console.log(error);
     }
-   
+
 }
 
 async function getcarpark()
@@ -63,9 +63,9 @@ async function findnearbycarpark()
 
     hdbcarparkcentral=["ACB","BBB","BRB1","CY","DUHM","HLM","KAB","KAM","KAS","PRM","SLS","SR1","SR2","TPM","UCS","WCB"];// HDB Car Parks Within Central Area
     carParkList=await getcarpark();
-   
+
    geocoordinates=await convert2XY();
-   
+
    console.log('carparklist');
 
    nearbycarpark=[];//array to store nearbycarpark
@@ -73,20 +73,20 @@ async function findnearbycarpark()
     range=300;
 
    for (i = 0; i < carParkList.length; i++) {
-   
-    
+
+
     if(carParkList[i].x_coord==null)
     {
       coordstr=carParkList[i].coordinates;
-       
+
       coord=coordstr.split(',');
-      
+
       if(carParkList[i].car_park_no!=null&&carParkList[i].car_park_no!=carParkList[i-1].car_park_no)
       {
         carParkList[i].x_coord=coord[0];
         carParkList[i].y_coord=coord[1];
       }
-   
+
       }
 
 
@@ -124,16 +124,16 @@ async function findnearbycarpark()
       }
     }
   }
-     
+
 
   return await nearbycarpark;
 }
 
 
 async function getnearbycarpark() {
-    
+
     nearbycarpark=await findnearbycarpark();
-    
+
     for(i=0;i<nearbycarpark.length;i++)
   {
     const response = await fetch(
@@ -151,9 +151,9 @@ async function getnearbycarpark() {
 
 
   }
-  
 
-    
+
+
 
 
   return await nearbycarpark;
@@ -161,11 +161,11 @@ async function getnearbycarpark() {
 
 async function getcarparkinfo(){
 
-    
+
     api_url="https://api.data.gov.sg/v1/transport/carpark-availability";
     const res = await fetch(api_url);
     const data = await res.json();
-    
+
     nearbycarpark=await getnearbycarpark();
     console.log(nearbycarpark);
     for(var j=0;j<nearbycarpark.length;j++)
@@ -174,15 +174,15 @@ async function getcarparkinfo(){
         console.log(target);
         for (i = 0; i < data.items[0].carpark_data.length; i++) {
             if (data.items[0].carpark_data[i].carpark_number == target) {
-          
-            avail=data.items[0].carpark_data[i].carpark_info[0].lots_available; 
+
+            avail=data.items[0].carpark_data[i].carpark_info[0].lots_available;
             total=data.items[0].carpark_data[i].carpark_info[0].total_lots;
             nearbycarpark[j].lots_available=avail;
             nearbycarpark[j].total_lots=total;
         }
          }
     }
-    
+
 
 
 
@@ -190,6 +190,22 @@ async function getcarparkinfo(){
     text=JSON.stringify(nearbycarpark);
     localStorage.setItem("nearbycarpark",text);
     window.location = "maps.html";
+}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function dropdownfunc() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
 }
 
 

@@ -6,6 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title> Nearby carpark</title>
     <link rel="stylesheet" href="project.css" />
+
+    <div class="dropdown">
+      <button onclick="dropdownfunc()" class="dropbtn">Menu </button>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="index.html">Home</a>
+        <a href="userLogin.html">Login</a>
+        <a href="createAcc.html">Sign Up</a>
+      </div>
+    </div>
+
+
     <style>
       #map {
         height: 600px;
@@ -14,9 +25,10 @@
     </style>
   </head>
   <body>
-    
+    <h1>CARPARK CHECKER</h1>
+
     <button onclick="location.href='index.html'">Back to search</button>
-    <div id="map"></div>   
+    <div id="map"></div>
     <script>
 
        fetch("https://api.data.gov.sg/v1/transport/carpark-availability") // get carpark availability api
@@ -51,7 +63,7 @@
           }
         }
 
-        
+
       }
 
       function calculateDistance(){
@@ -68,7 +80,7 @@
             break;
           destination.push({ lat: nearbycarpark[i].x_coord, lng: nearbycarpark[i].y_coord})
         }
-      
+
          var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix(
        {
@@ -78,7 +90,7 @@
            avoidHighways: false,
             avoidTolls: false,
           }, get_distance);
-      
+
         }
 
       function initMap() {
@@ -94,33 +106,33 @@
           mapTypeControl: false,
           scaleControl: false,
           streetViewControl: false,
-  
+
         };
 
         // New map
         var map = new google.maps.Map(document.getElementById("map"), options);
 
-        
 
-      
+
+
           // markers array has first element: the search coordinates
         var markers = [
-          
+
           {
             coords: { lat: coordinates.latitude, lng: coordinates.longitude },
 
           },
         ];
 
-        
-        
-    
 
 
 
 
-        
-      
+
+
+
+
+
 
 
         // generating info window for each car park( rates, availability etc)
@@ -128,16 +140,16 @@
         nearbycarpark=JSON.parse(text);
         for(i=0;i<nearbycarpark.length;i++)
         {
-          
-          
+
+
 
           if(nearbycarpark[i].lots_available==null)
             nearbycarpark[i].lots_available="N/A";
-          
-          
+
+
             str=nearbycarpark[i].address+"<p></p>"+" Available: "+nearbycarpark[i].lots_available+"<p></p>"+"Walking duration: "+nearbycarpark[i].duration+"<p></p>"+"Weekday rates: "+nearbycarpark[i].weekdayRate+"/30mins"+"<p></p>"+"Sat rates: "+nearbycarpark[i].satdayRate+"/30mins"+"<p></p>"+"Sun rates: "+nearbycarpark[i].sunPHRate+"/30mins<p></p>";
-          
-         
+
+
 
           markers.push( {
             coords: { lat: nearbycarpark[i].x_coord, lng: nearbycarpark[i].y_coord },
@@ -146,7 +158,7 @@
             content: str,
           },)
         }
-       
+
         // Loop through markers get nearest 5(6 including destination) list sorted according to distance
         for (var i = 0; i <6; i++) {
           // Add marker
@@ -184,7 +196,7 @@
           }
         }
       }
-      
+
 
 
 
@@ -198,11 +210,11 @@ if (status == 'OK') {
   var origins = response.originAddresses;
   var destinations = response.destinationAddresses;
   console.log(response);
-  
+
   for (var i = 0; i < origins.length; i++) {
     var results = response.rows[i].elements;
     console.log(results);
- 
+
     for (var j = 0; j < results.length; j++) {
       var element = results[j];
       console.log(element);
@@ -239,7 +251,7 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
   text=JSON.stringify(nearbycarpark);
   localStorage.setItem("nearbycarpark",text);
 
-  
+
   initMap(); //generate map
 }
 
@@ -375,5 +387,26 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
           })
       })
     </script>
+    
+    <script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function dropdownfunc() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+      if (!e.target.matches('.dropbtn')) {
+      var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown.classList.contains('show')) {
+          myDropdown.classList.remove('show');
+        }
+      }
+    }
+    </script>
+
+
+
   </body>
 </html>
