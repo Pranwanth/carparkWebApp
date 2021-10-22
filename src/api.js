@@ -21,8 +21,21 @@ async function geocode() {
 async function convert2XY() {
     //wait for geocode to get coordinates
     let coordinates = await geocode();//in json format testgit
-    var lat = coordinates.results[0].geometry.location.lat;
-    var lng = coordinates.results[0].geometry.location.lng;
+
+    if(coordinates.status='ZERO RESULTS')
+    {
+      var message = document.getElementById("NoResult");
+      message.innerHTML="No results found, please make sure that you have entered a valid postal code."
+    }
+      console.log(coordinates);
+      var lat = coordinates.results[0].geometry.location.lat;
+      var lng = coordinates.results[0].geometry.location.lng;
+      
+
+   
+      
+  
+  
 
     coord = {
         latitude: lat,
