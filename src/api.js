@@ -192,6 +192,39 @@ async function getcarparkinfo(){
     window.location = "maps.html";
 }
 
+async function getcarparkinfo_loggedin(){
+
+
+  api_url="https://api.data.gov.sg/v1/transport/carpark-availability";
+  const res = await fetch(api_url);
+  const data = await res.json();
+
+  nearbycarpark=await getnearbycarpark();
+  console.log(nearbycarpark);
+  for(var j=0;j<nearbycarpark.length;j++)
+  {
+      target=nearbycarpark[j].car_park_no;
+      console.log(target);
+      for (i = 0; i < data.items[0].carpark_data.length; i++) {
+          if (data.items[0].carpark_data[i].carpark_number == target) {
+
+          avail=data.items[0].carpark_data[i].carpark_info[0].lots_available;
+          total=data.items[0].carpark_data[i].carpark_info[0].total_lots;
+          nearbycarpark[j].lots_available=avail;
+          nearbycarpark[j].total_lots=total;
+      }
+       }
+  }
+
+
+
+
+  console.log("test");
+  text=JSON.stringify(nearbycarpark);
+  localStorage.setItem("nearbycarpark",text);
+  window.location = "maps_loggedin.html";
+}
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function dropdownfunc() {
