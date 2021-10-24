@@ -1,5 +1,5 @@
 h1 {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   text-align: center;
   padding-top: 50px;
   padding-bottom: 90px;
@@ -8,7 +8,7 @@ h1 {
   margin-right: -20px;
 }
 body {
-  background-color: #B0E0E6;
+  background-color: #b0e0e6;
 }
 input[type="text"] {
   width: 700px;
@@ -28,7 +28,7 @@ form {
   display: inline-block;
 }
 button {
-  background-color: #008CBA;
+  background-color: #008cba;
   border: none;
   border-radius: 4px;
   margin: auto;
@@ -43,15 +43,14 @@ h2 {
   padding-left: 350px;
   margin: auto;
 }
-h3
-{
+h3 {
   font-size: 30px;
 }
 .mission p {
   padding-left: 350px;
 }
 button:hover {
-  background-color: #4169E1;
+  background-color: #4169e1;
   color: #f1faee;
 }
 
@@ -95,8 +94,6 @@ button:active {
 
   overflow: hidden;
 }
-
-
 
 #form_header_container {
   text-align: center;
@@ -162,7 +159,7 @@ input {
 
 /* Dropdown Button */
 .dropbtn {
-  background-color: #3498DB;
+  background-color: #3498db;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -171,8 +168,9 @@ input {
 }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #2980b9;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -188,7 +186,7 @@ input {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -201,7 +199,11 @@ input {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
+.show {
+  display: block;
+}
