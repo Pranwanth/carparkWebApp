@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth,signOut, signInWithEmailAndPassword } from 'firebase/auth';
 //import { getDatabase, ref, set } from 'firebase/database';
 
 
@@ -16,54 +16,6 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const auth = getAuth(firebaseApp);
-//const db = getDatabase(firebaseApp);
-
-  // Set up our register function 
- /* function register () {
-    // Get all our input fields
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-   
-
-    console.log(validate_email(email));
-    console.log(validate_password(password));
-
-    // Validate input fields
-    if (validate_email(email) == false) {
-        
-        alert('Invalid Email')
-        return 
-        // Don't continue running the code
-    }
-
-    if(validate_password(password) == false)
-    {
-      alert('Invalid Password please ensure it is longer than 10 characters')
-      return;
-    }
-    
-    // Move on with Auth
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user);
-      // ...
-      /*set(ref(db, 'users/' + user.uid), {
-        email: email
-      });*/
-    /*})
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      if(errorCode == 'auth/email-already-in-use')
-      {
-        alert('User already exists, please login');
-      }
-      console.log(errorCode);
-      console.log(errorMessage);
-    });
-}*/
 
 // Set up our login function
  function login () {
@@ -91,8 +43,10 @@ const auth = getAuth(firebaseApp);
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
-      const user = userCredential.user;
+      const user = auth.currentUser.uid;
+      sessionStorage.setItem("currentUser_uid", user);
       console.log('You have successfully logged!!');
+      window.location.replace("userAccountPage.html");
       // ...
     })
     .catch((error) => {
@@ -134,7 +88,4 @@ function validate_password(password) {
   }
 }
 
-
 document.getElementById('login').addEventListener("click", login);
-
-
