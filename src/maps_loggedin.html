@@ -367,16 +367,16 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
       update(ref(db), updates);*/
       
       function addTofavorites(cpName, cpNum, user){
-        set(ref(db, 'users/' + user), {
+        /*set(ref(db, 'users/' + user), {
           CarParkName: cpName,
           CarparkNumber: cpNum,
-        });
-        /*const postListRef = ref(db, 'users/' + newPostKey + '/favCarParks');
+        });*/
+        const postListRef = ref(db, 'users/' + user + '/favCarParks');
         const newPostRef = push(postListRef);
         set(newPostRef, {
           carparkName: cpName,
           carParkNum: cpNum
-        })*/
+        })
         /*update(ref(db, "users/" + newPostKey + "/favCarParks"), {
           carparkName: cpName,
           carParkNum: cpNum
