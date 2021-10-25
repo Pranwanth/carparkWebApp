@@ -366,16 +366,19 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
         }
       update(ref(db), updates);*/
       
-      function addTofavorites(cpName, cpNum, user){
+      function addTofavorites(cpName, cpNum, cpWeekDayRate, cpSatRate, cpSunPhRate, cpParkingType, user){
         /*set(ref(db, 'users/' + user), {
           CarParkName: cpName,
           CarparkNumber: cpNum,
         });*/
-        const postListRef = ref(db, 'users/' + user + '/favCarParks');
+        const postListRef = ref(db, 'users/' + user + '/favCarParks/' + cpNum);
         const newPostRef = push(postListRef);
-        set(newPostRef, {
+        set(postListRef, {
           carparkName: cpName,
-          carParkNum: cpNum
+          carparkWeekDayRate: cpWeekDayRate,
+          carparkSatDayRate: cpSatRate,
+          carparkSunPHrate: cpSunPhRate,
+          //carParkNum: cpNum
         })
         /*update(ref(db, "users/" + newPostKey + "/favCarParks"), {
           carparkName: cpName,
@@ -392,7 +395,22 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
           //console.log(item.parentElement.cells[0].innerHTML);
           const cpName = item.parentElement.cells[0].innerHTML;
           const cpNum = item.parentElement.id;
-          addTofavorites(cpName, cpNum, user);
+          var cpWeekDayRate;
+          var cpSatRate;
+          var cpSunPhRate;
+          var cpParkingType;
+          for(var i = 0; i<nearbycarpark.length; i++)
+          {
+            if(nearbycarpark[i].car_park_no == cpNum)
+            {
+              cpWeekDayRate = nearbycarpark[i].weekdayRate;
+              cpSatRate = nearbycarpark[i].satdayRate;
+              cpSunPhRate = nearbycarpark[i].sunPHRate;
+              cpParkingType = nearbycarpark[i].parkingSystem;
+               
+            }
+          }
+          addTofavorites(cpName, cpNum, cpWeekDayRate, cpSatRate, cpSunPhRate, cpParkingType, user);
           })
       })
     </script>

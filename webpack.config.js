@@ -8,7 +8,8 @@ module.exports = {
     {
         bundle: './src/user.js',
         createAcc: './src/createAcc.js',
-        logOut: './src/signOut.js'
+        logOut: './src/signOut.js',
+        favList: './src/favListDisplay.js'
     },
     // The location of the build folder described above
     output: {
