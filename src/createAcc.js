@@ -24,10 +24,6 @@ const auth = getAuth(firebaseApp);
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
    
-
-    console.log(validate_email(email));
-    console.log(validate_password(password));
-
     // Validate input fields
     if (validate_email(email) == false) {
         
