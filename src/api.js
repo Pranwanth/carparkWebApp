@@ -28,7 +28,7 @@ async function convert2XY() {
         function(){
           var message = document.getElementById("NoResult");
           message.innerHTML="No results found, please make sure that you have entered a valid postal code." },
-        2000
+        4000
       );
     
       
