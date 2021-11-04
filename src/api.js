@@ -228,32 +228,3 @@ async function getcarparkinfo_loggedin(){
   window.location = "maps_loggedin.html";
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function dropdownfunc() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
-    }
-  }
-}
-
-
-
-
-
-
-
-
-//var locationForm = document.getElementById("location-form");
-// Listen for submit
-
-//locationForm.addEventListener("submit", getnearbycarpark,false);
-
-//getnearbycarpark();
