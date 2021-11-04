@@ -43,7 +43,7 @@ const auth = getAuth(firebaseApp);
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log(user);
+      alert("Your account has been created!")
       // ...
       /*set(ref(db, 'users/' + user.uid), {
         email: email
