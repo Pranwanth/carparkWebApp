@@ -33,7 +33,6 @@ async function convert2XY() {
     
       
     }
-      console.log(coordinates);
       var lat = coordinates.results[0].geometry.location.lat;
       var lng = coordinates.results[0].geometry.location.lng;
       
@@ -84,8 +83,6 @@ async function findnearbycarpark()
     carParkList=await getcarpark();
 
    geocoordinates=await convert2XY();
-
-   console.log('carparklist');
 
    nearbycarpark=[];//array to store nearbycarpark
 
@@ -162,7 +159,6 @@ async function getnearbycarpark() {
       nearbycarpark[i].y_coord
   );
   const geocoordinates = await response.json();
-  console.log(geocoordinates);
   nearbycarpark[i].x_coord= await geocoordinates.latitude;
   nearbycarpark[i].y_coord=await geocoordinates.longitude;
 
@@ -186,11 +182,9 @@ async function getcarparkinfo(){
     const data = await res.json();
 
     nearbycarpark=await getnearbycarpark();
-    console.log(nearbycarpark);
     for(var j=0;j<nearbycarpark.length;j++)
     {
         target=nearbycarpark[j].car_park_no;
-        console.log(target);
         for (i = 0; i < data.items[0].carpark_data.length; i++) {
             if (data.items[0].carpark_data[i].carpark_number == target) {
 
@@ -202,10 +196,6 @@ async function getcarparkinfo(){
          }
     }
 
-
-
-
-    console.log("test");
     text=JSON.stringify(nearbycarpark);
     localStorage.setItem("nearbycarpark",text);
     window.location = "maps.html";
@@ -219,11 +209,9 @@ async function getcarparkinfo_loggedin(){
   const data = await res.json();
 
   nearbycarpark=await getnearbycarpark();
-  console.log(nearbycarpark);
   for(var j=0;j<nearbycarpark.length;j++)
   {
       target=nearbycarpark[j].car_park_no;
-      console.log(target);
       for (i = 0; i < data.items[0].carpark_data.length; i++) {
           if (data.items[0].carpark_data[i].carpark_number == target) {
 
@@ -235,10 +223,6 @@ async function getcarparkinfo_loggedin(){
        }
   }
 
-
-
-
-  console.log("test");
   text=JSON.stringify(nearbycarpark);
   localStorage.setItem("nearbycarpark",text);
   window.location = "maps_loggedin.html";

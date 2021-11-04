@@ -23,9 +23,12 @@
         width: 100%;
       }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1>CARPARK CHECKER</h1>
+    <h1>EZPARK</h1>
 
     <button onclick="location.href='index_loggedin.html'">Back to search</button>
     <div id="map"></div>
@@ -47,13 +50,6 @@
 
         for (i = 0; i < data.items[0].carpark_data.length; i++) {
           if (data.items[0].carpark_data[i].carpark_number == target) {
-            console.log(data.items[0].carpark_data[i]);
-            console.log(
-              "available: " +
-                data.items[0].carpark_data[i].carpark_info[0].lots_available +
-                " / " +
-                data.items[0].carpark_data[i].carpark_info[0].total_lots
-            );
             avail_lots =
               data.items[0].carpark_data[i].carpark_info[0].lots_available;
             total_lots =
@@ -97,7 +93,6 @@
         // Map options
         text = localStorage.getItem("search coordinates");
         coordinates = JSON.parse(text);
-        console.log(coordinates);
 
         var options = {
           zoom: 16,
@@ -209,15 +204,12 @@ nearbycarpark=JSON.parse(text);
 if (status == 'OK') {
   var origins = response.originAddresses;
   var destinations = response.destinationAddresses;
-  console.log(response);
 
   for (var i = 0; i < origins.length; i++) {
     var results = response.rows[i].elements;
-    console.log(results);
 
     for (var j = 0; j < results.length; j++) {
       var element = results[j];
-      console.log(element);
       nearbycarpark[j].distance = element.distance.text;
       nearbycarpark[j].duration = element.duration.text;
       var from = origins[i];
@@ -259,7 +251,7 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
     <script
       async
       defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDPXWT4iTaB2hL_E-NAiMROYvxEJAptfM&callback=calculateDistance"// will call the setup funtion
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDPXWT4iTaB2hL_E-NAiMROYvxEJAptfM&callback=calculateDistance"
     ></script>
 
     <script type="module">
@@ -289,9 +281,6 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
       const auth = getAuth();
 
       async function generate_table(nearbycarpark) {
-        //text = localStorage.getItem("nearbycarpark");
-        //nearbycarpark = JSON.parse(text);
-        // get the reference for the body
         var body = document.getElementsByTagName("body")[0];
 
         // creates a <table> element and a <tbody> element
@@ -314,18 +303,14 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
           cell.appendChild(cellText);
           row.appendChild(cell);
 
-          var cell = document.createElement("td");
+          /*var cell = document.createElement("td");
           var cellText = document.createTextNode(nearbycarpark[i].distance);
           cell.appendChild(cellText);
-          row.appendChild(cell);
+          row.appendChild(cell);*/
 
           var btn = document.createElement("button");
 
           btn.innerHTML = "Add to favorites";
-          //var cpName = row.cells[0].innerHTML;
-          //var cpNum = row.id;
-          //const user = "user1"
-          //btn.onclick = addTofavorites(cpName, cpNum, user);
           btn.className = "btnDB";
           row.appendChild(btn);
 
@@ -340,37 +325,11 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
         // sets the border attribute of tbl to 2;
         tbl.setAttribute("border", "2");
       }
-
-
-
       const text = localStorage.getItem("nearbycarpark");
       const nearbycarpark = JSON.parse(text);
       generate_table(nearbycarpark);
 
-      //console.log(auth.currentUser.uid);
-
-      /*
-      var table = document.getElementById("myTable");
-      console.log("Here is the TABLE info");
-      console.log(table.rows.length)
-      const lenTable = table.rows.length;
-      const rowArray = new Array();
-
-
-      set(ref(db, "users"), null)
-
-      const newPostKey = push(child(ref(db), "users")).key;
-      const updates = {};
-      updates['/users/' + newPostKey] = {
-            favCarParks:{}
-        }
-      update(ref(db), updates);*/
-
       function addTofavorites(cpName, cpNum, cpWeekDayRate, cpSatRate, cpSunPhRate, cpParkingType, user){
-        /*set(ref(db, 'users/' + user), {
-          CarParkName: cpName,
-          CarparkNumber: cpNum,
-        });*/
         const postListRef = ref(db, 'users/' + user + '/favCarParks/' + cpNum);
         const newPostRef = push(postListRef);
         set(postListRef, {
@@ -378,12 +337,7 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
           carparkWeekDayRate: cpWeekDayRate,
           carparkSatDayRate: cpSatRate,
           carparkSunPHrate: cpSunPhRate,
-          //carParkNum: cpNum
         })
-        /*update(ref(db, "users/" + newPostKey + "/favCarParks"), {
-          carparkName: cpName,
-          carParkNum: cpNum
-        })*/
       }
 
 
@@ -391,8 +345,6 @@ for(i=1;i<nearbycarpark.length;i++) //arrange carpark according to duration
 
       document.querySelectorAll('.btnDB').forEach(item => {
         item.addEventListener('click', event => {
-          //console.log("HERE!!!!")
-          //console.log(item.parentElement.cells[0].innerHTML);
           const cpName = item.parentElement.cells[0].innerHTML;
           const cpNum = item.parentElement.id;
           var cpWeekDayRate;
