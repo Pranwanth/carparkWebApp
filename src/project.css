@@ -110,7 +110,7 @@ button:active {
 #form_header {
   display: inline-block;
   font-size: 15px;
-  font-family: Bowlby One SC;
+  font-family: Montserrat;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -212,4 +212,5 @@ table,
 th,
 td {
   text-align: center;
+  font-family: Montserrat;
 }
