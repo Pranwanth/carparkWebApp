@@ -105,9 +105,6 @@ async function findnearbycarpark()
 
       }
 
-
-
-
       if(carParkList[i].weekdayRate==null)
       {
         carParkList[i].weekdayRate="$0.60";
@@ -161,16 +158,7 @@ async function getnearbycarpark() {
   const geocoordinates = await response.json();
   nearbycarpark[i].x_coord= await geocoordinates.latitude;
   nearbycarpark[i].y_coord=await geocoordinates.longitude;
-
-
-
-
   }
-
-
-
-
-
   return await nearbycarpark;
 }
 
